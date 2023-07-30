@@ -15,14 +15,6 @@ CLASS Mobile {
     string mobileBrand;
     string mobileModelName;
     double mobilePrice;
-
-    //Include Getters and setters for above variables.
-    string (*getMobileBrand)(Mobile* self);
-    string (*getMobileModelName)(Mobile* self);
-    double (*getMobilePrice)(Mobile* self);
-    void (*setMobileBrand)(Mobile* self, string brand);
-    void (*setMobileModelName)(Mobile* self, string mName);
-    void (*setMobilePrice)(Mobile* self,double price);
 };
 string getMBrand(Mobile* self) { return self->mobileBrand; }
 string getMModelName(Mobile* self) { return self->mobileModelName; }
@@ -44,24 +36,13 @@ int main()
     printf("Enter the mobile price:\n"); fflush(stdin);
     scanf_s("%lf",&price);
 
-    Mobile mobile = {
-        .mobileBrand.str = "",
-        .mobileModelName.str = "",
-        .mobilePrice =0,
-        .getMobileBrand = getMBrand,
-        .getMobileModelName = getMModelName,
-        .getMobilePrice = getMPrice,
-        .setMobileBrand = setMBrand,
-        .setMobileModelName = setMModelName,
-        .setMobilePrice = setMPrice
-    };
-
-    mobile.setMobileBrand(&mobile,brand);
-    mobile.setMobileModelName(&mobile, model);
-    mobile.setMobilePrice(&mobile, price);
+    Mobile mobile;
+    setMBrand(&mobile,brand);
+    setMModelName(&mobile, model);
+    setMPrice(&mobile, price);
     printf("Mobile Details\n");
-    printf("Mobile Brand: %s\n", mobile.getMobileBrand(&mobile));
-    printf("Mobile Model Name: %s\n", mobile.getMobileModelName(&mobile));
-    printf("Mobile Price : %f\n", mobile.getMobilePrice(&mobile));
+    printf("Mobile Brand: %s\n", getMBrand(&mobile));
+    printf("Mobile Model Name: %s\n", getMModelName(&mobile));
+    printf("Mobile Price : %f\n", getMPrice(&mobile));
     return 0;
 }
